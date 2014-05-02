@@ -33,6 +33,7 @@
         "symfony/http-foundation": "~2.4",
         "symfony/dependency-injection": "~2.4",
 
+        "elcodi/media-bundle": "0.1.*@dev",
         "elcodi/core-bundle": "0.1.*@dev"
     },
     "require-dev": {
@@ -41,9 +42,9 @@
         "elcodi/elcodi": "0.1.*@dev"
     },
     "autoload": {
-        "psr-0": { "Elcodi\\ProductBundle": "" }
+        "psr-0": { "Elcodi\\MediaBundle": "" }
     },
-    "target-dir": "Elcodi/Components/ProductBundle",
+    "target-dir": "Elcodi/Components/MediaBundle",
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
