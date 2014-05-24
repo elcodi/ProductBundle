@@ -12,14 +12,14 @@
  * @version ##version_placeholder##
  */
 
-namespace Elcodi\ProductBundle\Tests\Functional\Factory;
+namespace Elcodi\ProductBundle\Tests\Functional\Repository;
 
 use Elcodi\CoreBundle\Tests\WebTestCase;
 
 /**
- * Class ProductFactoryTest
+ * Class CategoryRepositoryTest
  */
-class ProductFactoryTest extends WebTestCase
+class CategoryRepositoryTest extends WebTestCase
 {
     /**
      * Returns the callable name of the service
@@ -29,30 +29,30 @@ class ProductFactoryTest extends WebTestCase
     public function getServiceCallableName()
     {
         return [
-            'elcodi.core.product.factory.product',
-            'elcodi.factory.product',
+            'elcodi.core.product.repository.category',
+            'elcodi.repository.category',
         ];
     }
 
     /**
-     * Test product factory provider
+     * Test category repository provider
      */
     public function testFactoryProvider()
     {
         $this->assertInstanceOf(
-            $this->container->getParameter('elcodi.core.product.entity.product.class'),
-            $this->container->get('elcodi.core.product.entity.product.instance')
+            $this->container->getParameter('elcodi.core.product.repository.category.class'),
+            $this->container->get('elcodi.core.product.repository.category')
         );
     }
 
     /**
-     * Test product factory provider alias
+     * Test category repository provider alias
      */
     public function testFactoryProviderAlias()
     {
         $this->assertInstanceOf(
-            $this->container->getParameter('elcodi.core.product.entity.product.class'),
-            $this->container->get('elcodi.entity.product.instance')
+            $this->container->getParameter('elcodi.core.product.repository.category.class'),
+            $this->container->get('elcodi.repository.category')
         );
     }
 }
