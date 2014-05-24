@@ -12,16 +12,15 @@
  * @version ##version_placeholder##
  */
 
-namespace Elcodi\ProductBundle\Tests\Functional\Services;
+namespace Elcodi\ProductBundle\Tests\Functional\Factory;
 
 use Elcodi\CoreBundle\Tests\WebTestCase;
 
 /**
- * Tests CategoryManager class
+ * Class ProductFactoryTest
  */
-class CategoryManagerTest extends WebTestCase
+class ProductFactoryTest extends WebTestCase
 {
-
     /**
      * Returns the callable name of the service
      *
@@ -29,6 +28,17 @@ class CategoryManagerTest extends WebTestCase
      */
     public function getServiceCallableName()
     {
-        return 'elcodi.core.product.service.category_manager';
+        return 'elcodi.core.product.factory.product';
+    }
+
+    /**
+     * Test product factory provider
+     */
+    public function testFactoryProvider()
+    {
+        $this->assertInstanceOf(
+            $this->container->getParameter('elcodi.core.product.entity.product.class'),
+            $this->container->get('elcodi.core.product.entity.product.instance')
+        );
     }
 }
