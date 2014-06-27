@@ -70,7 +70,7 @@ class ElcodiProductExtension extends AbstractExtension implements EntitiesOverri
     {
         return [
             'elcodi.core.product.load_only_categories_with_products' => $config['categories']['load_only_categories_with_products'],
-            'elcodi.core.product.menu_cache_key'                     => $config['categories']['menu_cache_key'],
+            'elcodi.core.product.cache_key'                          => $config['categories']['cache_key'],
         ];
     }
 
