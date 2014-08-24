@@ -1,0 +1,112 @@
+services:
+
+    #
+    # Factories
+    #
+
+    #
+    # Abstract purchasable factory
+    #
+    elcodi.core.product.factory.abstract.purchasable:
+        class: %elcodi.core.product.factory.abstract.abstract.class%
+        abstract: true
+        arguments:
+            currency_wrapper: @elcodi.currency_wrapper
+
+    #
+    # Factory for Product entities
+    #
+    elcodi.core.product.factory.product:
+        class: %elcodi.core.product.factory.product.class%
+        parent: elcodi.core.product.factory.abstract.purchasable
+        calls:
+            - [setEntityNamespace, ["%elcodi.core.product.entity.product.class%"]]
+
+    elcodi.factory.product:
+        alias: elcodi.core.product.factory.product
+
+    #
+    # Factory for Variant entities
+    #
+    elcodi.core.product.factory.variant:
+        class: %elcodi.core.product.factory.variant.class%
+        parent: elcodi.core.product.factory.abstract.purchasable
+        calls:
+            - [setEntityNamespace, ["%elcodi.core.product.entity.variant.class%"]]
+
+    elcodi.factory.product_variant:
+        alias: elcodi.core.product.factory.variant
+
+    #
+    # Factory for Manufacturer entities
+    #
+    elcodi.core.product.factory.manufacturer:
+        class: %elcodi.core.product.factory.manufacturer.class%
+        calls:
+            - [setEntityNamespace, ["%elcodi.core.product.entity.manufacturer.class%"]]
+
+    elcodi.factory.manufacturer:
+        alias: elcodi.core.product.factory.manufacturer
+
+    #
+    # Factory for Category entities
+    #
+    elcodi.core.product.factory.category:
+        class: %elcodi.core.product.factory.category.class%
+        calls:
+            - [setEntityNamespace, ["%elcodi.core.product.entity.category.class%"]]
+
+    elcodi.factory.category:
+        alias: elcodi.core.product.factory.category
+
+    #
+    # Entity providers
+    #
+
+    #
+    # Instance provider for Product entities
+    #
+    elcodi.core.product.entity.product.instance:
+        class: %elcodi.core.product.entity.product.class%
+        factory_service: elcodi.core.product.factory.product
+        factory_method: create
+        scope: prototype
+
+    elcodi.entity.product.instance:
+        alias: elcodi.core.product.entity.product.instance
+
+    #
+    # Instance provider for Variant entities
+    #
+    elcodi.core.product.entity.variant.instance:
+        class: %elcodi.core.product.entity.variant.class%
+        factory_service: elcodi.core.product.factory.variant
+        factory_method: create
+        scope: prototype
+
+    elcodi.entity.product_variant.instance:
+        alias: elcodi.core.product.entity.variant.instance
+
+    #
+    # Instance provider for Manufacturer entities
+    #
+    elcodi.core.product.entity.manufacturer.instance:
+        class: %elcodi.core.product.entity.manufacturer.class%
+        factory_service: elcodi.core.product.factory.manufacturer
+        factory_method: create
+        scope: prototype
+
+    elcodi.entity.manufacturer.instance:
+        alias: elcodi.core.product.entity.manufacturer.instance
+
+    #
+    # Instance provider for Category entities
+    #
+    elcodi.core.product.entity.category.instance:
+        class: %elcodi.core.product.entity.category.class%
+        factory_service: elcodi.core.product.factory.category
+        factory_method: create
+        scope: prototype
+
+    elcodi.entity.category.instance:
+        alias: elcodi.core.product.entity.category.instance
