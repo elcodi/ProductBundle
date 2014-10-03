@@ -97,7 +97,7 @@ class ProductData extends AbstractFixture implements DependentFixtureInterface
         /**
          * Product with variants
          *
-         * @var ProductInterface $productWithVariants
+         * @var ProductInterface $productReduced
          */
         $productWithVariants = $this
             ->container
