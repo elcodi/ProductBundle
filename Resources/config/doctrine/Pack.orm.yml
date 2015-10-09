@@ -1,7 +1,7 @@
-Elcodi\Component\Product\Entity\Product:
+Elcodi\Component\Product\Entity\Pack:
     type: entity
-    repositoryClass: Elcodi\Component\Product\Repository\ProductRepository
-    table: product
+    repositoryClass: Elcodi\Component\Product\Repository\PackRepository
+    table: pack
     id:
         id:
             type: integer
@@ -44,6 +44,10 @@ Elcodi\Component\Product\Entity\Product:
             column: stock
             type: integer
             nullable: true
+        stockType:
+            column: stock_type
+            type: integer
+            nullable: false
         price:
             column: price
             type: integer
@@ -107,14 +111,6 @@ Elcodi\Component\Product\Entity\Product:
                 referencedColumnName: id
                 nullable: true
                 onDelete: "SET NULL"
-        principalVariant:
-            targetEntity: Elcodi\Component\Product\Entity\Interfaces\VariantInterface
-            fetch: EAGER
-            joinColumn:
-                name: principal_variant_id
-                referencedColumnName: id
-                nullable: true
-                onDelete: "SET NULL"
         principalCategory:
             targetEntity: Elcodi\Component\Product\Entity\Interfaces\CategoryInterface
             joinColumn:
@@ -142,51 +138,47 @@ Elcodi\Component\Product\Entity\Product:
                  referencedColumnName: iso
                  nullable: true
 
-    oneToMany:
-        variants:
-            targetEntity: Elcodi\Component\Product\Entity\Interfaces\VariantInterface
-            mappedBy: product
-            cascade: [ "all" ]
-            orphanRemoval: true
-
     manyToMany:
         categories:
             targetEntity: Elcodi\Component\Product\Entity\Interfaces\CategoryInterface
-            inversedBy: products
             joinTable:
-                name: product_category
+                name: pack_category
                 joinColumns:
-                    product_id:
+                    pack_id:
                         referencedColumnName: id
-                        onDelete: "CASCADE"
                 inverseJoinColumns:
                     category_id:
                         referencedColumnName: id
-                        onDelete: "CASCADE"
         images:
             targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
             joinTable:
-                name: product_image
+                name: pack_image
                 joinColumns:
-                    product_id:
+                    pack_id:
                         referencedColumnName: id
-                        onDelete: "CASCADE"
                 inverseJoinColumns:
                     image_id:
                         referencedColumnName: id
-                        onDelete: "CASCADE"
-        attributes:
-            targetEntity: Elcodi\Component\Attribute\Entity\Interfaces\AttributeInterface
+        products:
+            targetEntity: Elcodi\Component\Product\Entity\Interfaces\ProductInterface
             joinTable:
-                name: product_attribute
+                name: pack_product
                 joinColumns:
+                    pack_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
                     product_id:
                         referencedColumnName: id
-                        onDelete: "CASCADE"
-                inverseJoinColumns:
-                    attribute_id:
+        variants:
+            targetEntity: Elcodi\Component\Product\Entity\Interfaces\VariantInterface
+            joinTable:
+                name: pack_variants
+                joinColumns:
+                    pack_id:
                         referencedColumnName: id
-                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    variant_id:
+                        referencedColumnName: id
 
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]
